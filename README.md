@@ -15,9 +15,14 @@ yay -S pyfetch
 ```
 
 ### Other ways
-Unfortunately, there is no other way to install PyFetch (yet).
-The only way to do it outside of Arch is by copying the AUR version of it then completely move the pyfetch file to /usr/bin/.
-If you don't want to do that, that is your only choice sadly.
+You will be installing via tarball extracting.
+This method will not automatically install dependencies.
+Simply run this command:
+```bash
+git clone https://github.com/andresr124/pyfetch.git
+```
+Then rename main.py to pyfetch (with no file extension).
+Then move pyfetch to /usr/bin/
 
 ## Dependencies
 These are the Dependencies you will need to have in order to use PyFetch:
