@@ -15,7 +15,7 @@ yay -S pyfetch
 ```
 
 ### Other ways
-You will be installing via tarball extracting.
+You will be installing git clone command.
 This method will not automatically install dependencies.
 Simply run this command:
 ```bash
