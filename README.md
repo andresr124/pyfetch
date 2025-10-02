@@ -29,6 +29,10 @@ Install python-pyfiglet with:
 ```bash
 pip install pyfiglet
 ```
+or
+```bash
+yay -S python-pyfiglet
+```
 
 ## License
 MIT License - see [LICENSE](LICENSE)
