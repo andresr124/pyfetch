@@ -19,11 +19,10 @@ def get_distro_name():
 distro = get_distro_name()
 logo_text = distro if distro else "PyFetch"
 
-# Optional: ASCII logo
-import pyfiglet
 print(pyfiglet.figlet_format(logo_text))
-print(f"User: {getpass.getuser()}")
+print(f"Distro: {get_distro_name()}")
 print(f"Hostname: {socket.gethostname()}")
-print(f"OS: {platform.system()} {platform.release()}")
+print(f"User: {getpass.getuser()}")
+print(f"Kernel: {platform.system()} {platform.release()}")
 print(f"CPU: {os.uname().machine}")
 print(f"RAM: {round(psutil.virtual_memory().total / (1024**3), 2)} GB")
