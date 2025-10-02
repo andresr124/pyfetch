@@ -21,8 +21,36 @@ Simply run this command:
 ```bash
 git clone https://github.com/andresr124/pyfetch.git
 ```
+Then test the file:
+```bash
+python3 main.py
+```
+If it runs fine, it's good! If not, follow the steps below this text:
+
+#### Commands to run
+If you use any debian-based distro:
+```bash
+sudo apt install python3 python3-pip
+```
+Or if you use fedora:
+```bash
+sudo dnf install python3 python3-pip
+```
+Then install the dependency:
+```bash
+pip install pyfiglet
+```
+Then test again:
+```bash
+python3 main.py
+```
+
+#### If it works
 Then rename main.py to pyfetch (with no file extension).
 Then move pyfetch to /usr/bin/
+
+#### If it doesn't work
+Then I don't know what to say.
 
 ## Dependencies
 These are the Dependencies you will need to have in order to use PyFetch:
