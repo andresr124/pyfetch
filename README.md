@@ -10,48 +10,16 @@ The neofetch alternative that is python-based. Displays information about your d
 
 ## How to install PyFetch
 
-### From AUR (Arch-only)
+### From AUR (Recommended for Arch)
 ```bash
 yay -S pyfetch
 ```
 
 ### Other ways
-You will be installing git clone command.
-This method will not automatically install dependencies.
-Simply run this command:
+There is a tarball installer on github releases. Download it then extract it then run this command in the install folder:
 ```bash
-git clone https://github.com/andresr124/pyfetch.git
+sudo ./install.sh
 ```
-Then test the file:
-```bash
-python3 main.py
-```
-If it runs fine, it's good! If not, follow the steps below this text:
-
-#### Commands to run
-If you use any debian-based distro:
-```bash
-sudo apt install python3 python3-pip
-```
-Or if you use fedora:
-```bash
-sudo dnf install python3 python3-pip
-```
-Then install the dependency:
-```bash
-pip install pyfiglet
-```
-Then test again:
-```bash
-python3 main.py
-```
-
-#### If it works
-Then rename main.py to pyfetch (with no file extension).
-Then move pyfetch to /usr/bin/
-
-#### If it doesn't work
-Then I don't know what to say.
 
 ## Dependencies
 These are the Dependencies you will need to have in order to use PyFetch:
