@@ -25,7 +25,7 @@ sudo ./install.sh
 These are the Dependencies you will need to have in order to use PyFetch:
 
 - python3
-- python-pyfiglet
+- pyfiglet
 
 Install python-pyfiglet with:
 ```bash
