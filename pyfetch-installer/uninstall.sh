@@ -17,8 +17,8 @@ case "$choice" in
     echo "NOTE: This will not uninstall the dependencies."
     sleep 1
     echo "Uninstalling pyfetch..."
-    if [ -f /usr/bin/pyfetch-beta ]; then
-        sudo rm /usr/bin/pyfetch-beta
+    if [ -f /usr/bin/pyfetch ]; then
+        sudo rm /usr/bin/pyfetch
         rm -rf ~/.config/pyfetch
         echo "pyfetch is now uninstalled."
     else
