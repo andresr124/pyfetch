@@ -9,13 +9,6 @@ The neofetch alternative that is python-based. Displays information about your d
 - If your distro fails to be detected, python-pyfiglet will use the "PyFetch" fallback text.
 
 ## How to install PyFetch
-
-### From AUR (Recommended for Arch)
-```bash
-yay -S pyfetch
-```
-
-### Other ways
 There is a tarball installer on github releases. Download it then extract it then run this command in the install folder:
 ```bash
 sudo ./install.sh
@@ -33,7 +26,7 @@ pip install pyfiglet
 ```
 or
 ```bash
-yay -S python-pyfiglet
+sudo pacman -S python-pyfiglet
 ```
 
 ## License
