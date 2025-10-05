@@ -1,7 +1,7 @@
-# <img width="294" height="92" alt="image" src="https://github.com/user-attachments/assets/1ef69b5c-03a4-4811-a5f5-6e4964c8cd9f" />
+# <img width="288" height="106" alt="image" src="https://github.com/user-attachments/assets/ae0dde08-5c3b-4bf6-a70f-05067366faaf" />
 The neofetch alternative that is python-based. Displays information about your desktop. (Not to be confused with Tyrowin's project which is also called pyfetch.)
 
-<img width="416" height="190" alt="image" src="https://github.com/user-attachments/assets/bc5700df-407c-4b64-88d9-532c255a59a2" />
+<img width="410" height="304" alt="image" src="https://github.com/user-attachments/assets/2661a3e1-b78e-4409-8931-02ad530ab341" />
 
 ## What it does
 
