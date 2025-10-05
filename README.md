@@ -33,6 +33,17 @@ or
 sudo pacman -S python-pyfiglet python-packaging
 ```
 
+## CLI Flags
+There are flags for PyFetch that you can use!
+- --h/--help (Show help message)
+- --minimal (Show minimal output)
+- --banner (Show banner ONLY)
+- --version (Version of PyFetch)
+- --shell (View your bash version)
+- --skipconfig (Skip pyfetch.conf)
+- --noplugins (Exclude Plugins)
+- --list-plugins (List all avaliable plugins)
+
 ## License
 MIT License - see [LICENSE](LICENSE)
 
