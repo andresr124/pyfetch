@@ -22,7 +22,7 @@ These are the Dependencies you will need to have in order to use PyFetch:
 - pyfiglet
 - packaging
 
-Install python-pyfiglet with:
+Install python-pyfiglet & python-packaging with:
 ```bash
 pip install pyfiglet
 pip install packaging
