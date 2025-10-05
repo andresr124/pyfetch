@@ -30,6 +30,8 @@ Here you go!
 - Customizable & Flexible
 - Improves fast
 - Supports plugins (PyFetch v1.1.0 RC2 and above)
+- Has MIT License
+- Open-Source
 - Programmed in Python
 - Has very few dependencies
 - Protected by PluginGuard to make sure plugins doesn't do anything dangerous
