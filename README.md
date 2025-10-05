@@ -13,7 +13,7 @@ The neofetch alternative that is python-based. Displays information about your d
 ## How to install PyFetch
 There is a tarball installer on github releases. Download it then extract it then run this command in the install folder:
 ```bash
-sudo ./install.sh
+./install.sh
 ```
 
 ## Dependencies
