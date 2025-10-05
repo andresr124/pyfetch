@@ -234,7 +234,7 @@ if cfg.get('enable_flags', 'true') == 'true':
             exit()
 
         if args.version:
-            print(f"PyFetch 1.1.0 Beta")
+            print(f"PyFetch 1.1.0")
             exit()
 
         if args.shell:
