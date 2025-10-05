@@ -20,14 +20,16 @@ These are the Dependencies you will need to have in order to use PyFetch:
 
 - python3
 - pyfiglet
+- packaging
 
 Install python-pyfiglet with:
 ```bash
 pip install pyfiglet
+pip install packaging
 ```
 or
 ```bash
-sudo pacman -S python-pyfiglet
+sudo pacman -S python-pyfiglet python-packaging
 ```
 
 ## License
