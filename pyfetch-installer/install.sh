@@ -32,9 +32,12 @@ case "$choice" in
   y|Y )
     echo "Installing dependencies..."
     if grep -qi arch /etc/os-release; then
-      sudo pacman -S --noconfirm python-pyfiglet
+      sudo pacman -S --noconfirm python-pyfiglet python-packaging
+    elif grep -qi void /etc/os-release; then
+      sudo xbps-install -Sy python3-setuptools python3-pyfiglet python3-packaging
     else
       pip install pyfiglet
+      pip install packaging
     fi
     sleep 1
     echo "Installing pyfetch..."
@@ -43,17 +46,26 @@ case "$choice" in
       sudo rm /usr/bin/pyfetch
       rm -rf ~/.config/pyfetch
       mkdir ~/.config/pyfetch
+      mkdir ~/.config/pyfetch/plugins
       sudo cp ./.files/pyfetch /usr/bin/pyfetch
       cp ./.files/config/pyfetch.conf ~/.config/pyfetch/pyfetch.conf
+      cp ./.files/config/pluginloader.py ~/.config/pyfetch/pluginloader.py
+      cp ./.files/config/pluginguard.py ~/.config/pyfetch/pluginguard.py
       sudo chmod +x /usr/bin/pyfetch
     else
       if [ -f ~/.config/pyfetch ]; then
         rm -rf ~/.config/pyfetch
         mkdir ~/.config/pyfetch
+        mkdir ~/.config/pyfetch/plugins
         cp ./.files/config/pyfetch.conf ~/.config/pyfetch/pyfetch.conf
+        cp ./.files/config/pluginloader.py ~/.config/pyfetch/pluginloader.py
+        cp ./.files/config/pluginguard.py ~/.config/pyfetch/pluginguard.py
       else
         mkdir ~/.config/pyfetch
+        mkdir ~/.config/pyfetch/plugins
         cp ./.files/config/pyfetch.conf ~/.config/pyfetch/pyfetch.conf
+        cp ./.files/config/pluginloader.py ~/.config/pyfetch/pluginloader.py
+        cp ./.files/config/pluginguard.py ~/.config/pyfetch/pluginguard.py
       fi
       sudo cp ./.files/pyfetch /usr/bin/pyfetch
       sudo chmod +x /usr/bin/pyfetch
