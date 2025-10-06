@@ -75,7 +75,7 @@ def get_shell_version():
 # Load plugins
 plugin_dir = os.path.expanduser("~/.config/pyfetch/plugins")
 plugins = load_plugins(plugin_dir)
-PYFETCH_VERSION = "1.1.0" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.01" # Changing the version in this line is highly not recommended.
 def run_plugins(plugins, cfg, PYFETCH_VERSION):
     from packaging import version
     for plugin in plugins:
@@ -201,7 +201,7 @@ def nopluginsbase():
         else:
             print("Packages: Unknown")
     if cfg.get('show_pyfversion', 'true') == 'true':
-        print(f"PyFetch Version: 1.1.0")
+        print(f"PyFetch Version: 1.1.01")
     if cfg.get('show_shell_version', 'true') == 'true':
         print("Shell:", get_shell_version())
     if cfg.get('show_battery', 'true') == 'true':
@@ -234,7 +234,7 @@ if cfg.get('enable_flags', 'true') == 'true':
             exit()
 
         if args.version:
-            print(f"PyFetch 1.1.0")
+            print(f"PyFetch 1.1.01")
             exit()
 
         if args.shell:
