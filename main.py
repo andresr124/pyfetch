@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+PYFETCH_VERSION = "1.1.02" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -75,7 +76,6 @@ def get_shell_version():
 # Load plugins
 plugin_dir = os.path.expanduser("~/.config/pyfetch/plugins")
 plugins = load_plugins(plugin_dir)
-PYFETCH_VERSION = "1.1.01" # Changing the version in this line is highly not recommended.
 def run_plugins(plugins, cfg, PYFETCH_VERSION):
     from packaging import version
     for plugin in plugins:
@@ -129,7 +129,8 @@ def get_package_count():
         "rpm": "rpm -qa",
         "apk": "apk info",
         "xbps-query": "xbps-query -l",
-        "pkg": "pkg info"
+        "pkg": "pkg info",
+        "apt": "apt list --installed"
     }
 
     for cmd, query in managers.items():
@@ -159,7 +160,7 @@ def pyfetchbase():
         else:
             print("Packages: Unknown")
     if cfg.get('show_pyfversion', 'true') == 'true':
-        print(f"PyFetch Version: 1.1.0")
+        print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
         print("Shell:", get_shell_version())
     if cfg.get('show_battery', 'true') == 'true':
@@ -179,7 +180,7 @@ def pyfetchbasenonconfig():
         print(f"Packages: {pkg_count}")
     else:
         print("Packages: Unknown")
-    print(f"PyFetch Version: 1.1.0")
+    print(f"PyFetch Version:", PYFETCH_VERSION)
     print("Shell:", get_shell_version())
     print("Battery:", get_battery_percentage())
     print(f"CPU: {os.uname().machine}")
@@ -201,7 +202,7 @@ def nopluginsbase():
         else:
             print("Packages: Unknown")
     if cfg.get('show_pyfversion', 'true') == 'true':
-        print(f"PyFetch Version: 1.1.01")
+        print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
         print("Shell:", get_shell_version())
     if cfg.get('show_battery', 'true') == 'true':
@@ -234,7 +235,7 @@ if cfg.get('enable_flags', 'true') == 'true':
             exit()
 
         if args.version:
-            print(f"PyFetch 1.1.01")
+            print(f"PyFetch", PYFETCH_VERSION)
             exit()
 
         if args.shell:
@@ -247,6 +248,7 @@ if cfg.get('enable_flags', 'true') == 'true':
 
         if args.noplugins:
             nopluginsbase()
+            exit()
 
         if args.list_plugins:
             from pluginloader import load_plugins, list_plugins
