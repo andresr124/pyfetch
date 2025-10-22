@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Preparing to install pyfetch..."
 sleep 1
@@ -12,6 +12,12 @@ fi
 # Check if Python Pip is installed
 if grep -qi arch /etc/os-release; then
     echo "Arch detected, skipping pip check."
+elif grep -qi void /etc/os-release; then
+    echo "Void Linux detected, skipping pip check."
+elif grep -qi fedora /etc/os-release; then
+    echo "Fedora detected, skipping pip check."
+elif grep -qi ubuntu /etc/os-release; then
+    echo "Ubuntu detected, skipping pip check."
 else
     if ! command -v pip &> /dev/null; then
       echo "Python Pip is not installed. Please install it now."
@@ -32,12 +38,17 @@ case "$choice" in
   y|Y )
     echo "Installing dependencies..."
     if grep -qi arch /etc/os-release; then
-      sudo pacman -S --noconfirm python-pyfiglet python-packaging
+      sudo pacman -S --noconfirm python-pyfiglet python-packaging python-psutil
     elif grep -qi void /etc/os-release; then
-      sudo xbps-install -Sy python3-setuptools python3-pyfiglet python3-packaging
+      sudo xbps-install -Sy python3-setuptools python3-pyfiglet python3-packaging python3-psutil
+    elif grep -qi fedora /etc/os-release; then
+      sudo dnf install -y python3-setuptools python3-pyfiglet python3-packaging python3-psutil
+    elif grep -qi ubuntu /etc/os-release; then
+      sudo apt-get install -y python3-setuptools python3-pyfiglet python3-packaging python3-psutil
     else
       pip install pyfiglet
       pip install packaging
+      pip install python-psutil
     fi
     sleep 1
     echo "Installing pyfetch..."
