@@ -24,14 +24,15 @@ These are the Dependencies you will need to have in order to use PyFetch:
 - packaging
 - psutil
 
-Install python-pyfiglet & python-packaging with:
+Install the dependencies with:
 ```bash
 pip install pyfiglet
 pip install packaging
+pip install psutil
 ```
 or
 ```bash
-sudo pacman -S python-pyfiglet python-packaging
+sudo pacman -S python-pyfiglet python-packaging python-psutil
 ```
 
 ## CLI Flags
