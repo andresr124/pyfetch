@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-PYFETCH_VERSION = "1.1.02" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.03" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -19,8 +19,6 @@ def load_conf(path):
             key, value = line.split('=', 1)
             config[key.strip()] = value.strip().lower()
     return config
-
-# Load config
 cfg = load_conf(os.path.expanduser("~/.config/pyfetch/pyfetch.conf"))
 
 import platform
@@ -144,6 +142,17 @@ def get_package_count():
 
 pkg_count = get_package_count()
 
+# Get Desktop Environment
+def get_desktop_environment():
+    de = os.environ.get("XDG_CURRENT_DESKTOP") or os.environ.get("DESKTOP_SESSION") or "Unknown"
+    if "KDE" in de.upper() or "PLASMA" in de.upper():
+        return f"KDE Plasma (You have great taste!)"
+    if "Zorin" in de.upper():
+        return f"GNOME"
+    return de
+
+de = get_desktop_environment()
+
 # Turn entire base of PyFetch to 1 command
 def pyfetchbase():
     if cfg.get('ascii_art', 'true') == 'true':
@@ -154,6 +163,8 @@ def pyfetchbase():
     print(f"User: {getpass.getuser()}")
     if cfg.get('show_kernel', 'true') == 'true':
         print(f"Kernel: {platform.system()} {platform.release()}")
+    if cfg.get('show_de', 'true') == 'true':
+        print(f"Desktop Environment: {de}")
     if cfg.get('show_packages', 'true') == 'true':
         if pkg_count is not None:
             print(f"Packages: {pkg_count}")
@@ -176,6 +187,7 @@ def pyfetchbasenonconfig():
     print(f"Hostname: {socket.gethostname()}")
     print(f"User: {getpass.getuser()}")
     print(f"Kernel: {platform.system()} {platform.release()}")
+    print(f"Desktop Environment: {de}")
     if pkg_count is not None:
         print(f"Packages: {pkg_count}")
     else:
@@ -196,6 +208,8 @@ def nopluginsbase():
     print(f"User: {getpass.getuser()}")
     if cfg.get('show_kernel', 'true') == 'true':
         print(f"Kernel: {platform.system()} {platform.release()}")
+    if cfg.get('show_de', 'true') == 'true':
+        print(f"Desktop Environment: {de}")
     if cfg.get('show_packages', 'true') == 'true':
         if pkg_count is not None:
             print(f"Packages: {pkg_count}")
