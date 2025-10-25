@@ -18,6 +18,10 @@ elif grep -qi fedora /etc/os-release; then
     echo "Fedora detected, skipping pip check."
 elif grep -qi ubuntu /etc/os-release; then
     echo "Ubuntu detected, skipping pip check."
+elif grep -qi zorin /etc/os-release; then
+    echo "Zorin OS detected, skipping pip check."
+elif grep -qi debian /etc/os-release; then
+    echo "Saving Python Pip check for later."
 else
     if ! command -v pip &> /dev/null; then
       echo "Python Pip is not installed. Please install it now."
@@ -45,6 +49,18 @@ case "$choice" in
       sudo dnf install -y python3-setuptools python3-pyfiglet python3-packaging python3-psutil
     elif grep -qi ubuntu /etc/os-release; then
       sudo apt-get install -y python3-setuptools python3-pyfiglet python3-packaging python3-psutil
+    elif grep -qi zorin /etc/os-release; then
+      sudo apt-get install -y python3-setuptools python3-pyfiglet python3-packaging python3-psutil
+    elif grep -qi debian /etc/os-release; then
+      sudo apt-get install -y python3-setuptools python3-pyfiglet python3-psutil
+      echo "WARNING: Debian does not have the package python3-packaging in it's official repo. Checking for python pip..."
+      sleep 1
+      if ! command -v pip &> /dev/null; then
+        echo "Python Pip is not installed. Good luck on getting python3-packaging!"
+      else
+        echo "Python Pip detected, installing packaging..."
+        pip install packaging
+      fi
     else
       pip install pyfiglet
       pip install packaging
