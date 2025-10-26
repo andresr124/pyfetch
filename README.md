@@ -8,7 +8,6 @@ The neofetch alternative that is python-based. Displays information about your d
 - Detects your distro and uses python-pyfiglet to display text in ASCII art.
 - CPU, RAM, and hostname information.
 - Custom plugins to expand it further.
-- If your distro fails to be detected, python-pyfiglet will use the "PyFetch" fallback text.
 
 ## How to install PyFetch
 There is a tarball installer on github releases. Download it then extract it then run this command in the install folder:
