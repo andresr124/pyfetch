@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-PYFETCH_VERSION = "1.1.1" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.1-2" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -204,7 +204,7 @@ def pyfetchbase():
         else:
             print("Packages: Unknown")
     if cfg.get('fun_facts', 'true') == 'true':
-        print(random_fact)
+        print("Fun Fact:", random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
@@ -231,7 +231,7 @@ def pyfetchbasenonconfig():
         print(f"Packages: {pkg_count}")
     else:
         print("Packages: Unknown")
-    print(random_fact)
+    print("Fun Fact:", random_fact)
     print(f"PyFetch Version:", PYFETCH_VERSION)
     print("Shell:", get_shell_version())
     print("Battery:", get_battery_percentage())
@@ -260,7 +260,7 @@ def nopluginsbase():
         else:
             print("Packages: Unknown")
     if cfg.get('fun_facts', 'true') == 'true':
-        print(random_fact)
+        print("Fun Fact:", random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
@@ -282,6 +282,7 @@ if cfg.get('enable_flags', 'true') == 'true':
         parser.add_argument("--noplugins", action="store_true", help="Exclude Plugins")
         parser.add_argument("--list-plugins", action="store_true", help="List all available plugins")
         parser.add_argument("--fun-fact", action="store_true", help="Show some fun facts")
+        parser.add_argument("--edit-config", action="store_true", help="A easier way to edit pyfetch.conf")
         args = parser.parse_args()
 
         if args.minimal:
@@ -324,6 +325,10 @@ if cfg.get('enable_flags', 'true') == 'true':
 
         if args.fun_fact:
             print(random_fact)
+            exit()
+
+        if args.edit_config:
+            os.system('nano ~/.config/pyfetch/pyfetch.conf')
             exit()
 
         # If no flags are running
