@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-PYFETCH_VERSION = "1.1.03" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.1" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -32,6 +32,7 @@ import importlib.util
 import subprocess
 import argparse
 import time
+import random
 pluginloader_path = os.path.expanduser("~/.config/pyfetch")
 sys.path.append(pluginloader_path)
 from pluginloader import load_plugins, run_plugins
@@ -100,6 +101,11 @@ def get_distro_name():
     except FileNotFoundError:
         return None
 
+if get_distro_name() == "Manjaro":
+    distro_name = "Trashjaro"
+else:
+    distro_name = get_distro_name()
+
 # Read raw config line (not just parsed values)
 config_path = os.path.expanduser("~/.config/pyfetch/pyfetch.conf")
 banner_text = None
@@ -109,15 +115,16 @@ with open(config_path) as f:
     for line in f:
         if "banner_text" in line:
             if line.strip().startswith("#"):
-                banner_text = get_distro_name()
+                banner_text = distro_name
             else:
                 banner_text = line.split("=", 1)[1].strip()
             break
 
 if banner_text is None:
-    banner_text = get_distro_name()
+    banner_text = distro_name
 
 ascii_banner = pyfiglet.figlet_format(banner_text)
+trashjaro_backup = pyfiglet.figlet_format("Trashjaro")
 
 # Find amount of packages
 def get_package_count():
@@ -153,12 +160,38 @@ def get_desktop_environment():
 
 de = get_desktop_environment()
 
+# Import fun facts
+facts = [
+    "Did you know that Tux the mascot is a penguin because in 1993, Linus Torvalds got bitten by a Penguin?",
+    "International Linux Day is celebrated in August 25th.",
+    "The creator of PyFetch is a big KDE Plasma fan.",
+    "If you want the best experience with PyFetch, use Arch.",
+    "Did you know Manjaro users are the only Linux users that loves suffering?",
+    "Windows does not support PyFetch.",
+    "Did you know Gentoo users compiled their entire soul?",
+    "Be aware of penguinitis!",
+    "Did you know Arch users never touch grass?",
+    "Does people even read these?",
+    "Did you know Windows users think that Linux users are like hackers?",
+    "PyFetch was inspired by Neofetch.",
+    "Candice? Who's candice?",
+    "Did you know PyFetch has the MIT License?",
+    "The PyFetch github is https://github.com/linuxaddict124/pyfetch",
+    "Python is great for AI!",
+    "I wonder if Python websites exist."
+    ]
+random_fact = random.choice(facts)
+
 # Turn entire base of PyFetch to 1 command
 def pyfetchbase():
     if cfg.get('ascii_art', 'true') == 'true':
-        print(ascii_banner)
+        if banner_text == "Manjaro":
+            print("Autocorrecting to Trashjaro.")
+            print(trashjaro_backup)
+        else:
+            print(ascii_banner)
     if cfg.get('show_distro', 'true') == 'true':
-        print(f"Distro: {get_distro_name()}")
+        print(f"Distro: {distro_name}")
     print(f"Hostname: {socket.gethostname()}")
     print(f"User: {getpass.getuser()}")
     if cfg.get('show_kernel', 'true') == 'true':
@@ -170,6 +203,8 @@ def pyfetchbase():
             print(f"Packages: {pkg_count}")
         else:
             print("Packages: Unknown")
+    if cfg.get('fun_facts', 'true') == 'true':
+        print(random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
@@ -182,8 +217,12 @@ def pyfetchbase():
         run_plugins(plugins, cfg, PYFETCH_VERSION)
 
 def pyfetchbasenonconfig():
-    print(ascii_banner)
-    print(f"Distro: {get_distro_name()}")
+    if banner_text == "Manjaro":
+        print("Autocorrecting to Trashjaro.")
+        print(trashjaro_backup)
+    else:
+        print(ascii_banner)
+    print(f"Distro: {distro_name}")
     print(f"Hostname: {socket.gethostname()}")
     print(f"User: {getpass.getuser()}")
     print(f"Kernel: {platform.system()} {platform.release()}")
@@ -192,6 +231,7 @@ def pyfetchbasenonconfig():
         print(f"Packages: {pkg_count}")
     else:
         print("Packages: Unknown")
+    print(random_fact)
     print(f"PyFetch Version:", PYFETCH_VERSION)
     print("Shell:", get_shell_version())
     print("Battery:", get_battery_percentage())
@@ -201,9 +241,13 @@ def pyfetchbasenonconfig():
 
 def nopluginsbase():
     if cfg.get('ascii_art', 'true') == 'true':
-        print(ascii_banner)
+        if banner_text == "Manjaro":
+            print("Autocorrecting to Trashjaro.")
+            print(trashjaro_backup)
+        else:
+            print(ascii_banner)
     if cfg.get('show_distro', 'true') == 'true':
-        print(f"Distro: {get_distro_name()}")
+        print(f"Distro: {distro_name}")
     print(f"Hostname: {socket.gethostname()}")
     print(f"User: {getpass.getuser()}")
     if cfg.get('show_kernel', 'true') == 'true':
@@ -215,6 +259,8 @@ def nopluginsbase():
             print(f"Packages: {pkg_count}")
         else:
             print("Packages: Unknown")
+    if cfg.get('fun_facts', 'true') == 'true':
+        print(random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
     if cfg.get('show_shell_version', 'true') == 'true':
@@ -227,7 +273,7 @@ def nopluginsbase():
 # Flags Manager
 if cfg.get('enable_flags', 'true') == 'true':
     if __name__ == "__main__":
-        parser = argparse.ArgumentParser(description="PyFetch CLI")
+        parser = argparse.ArgumentParser(description="Python-based Neofetch Alternative")
         parser.add_argument("--minimal", action="store_true", help="Show minimal output")
         parser.add_argument("--banner", action="store_true", help="Show banner ONLY")
         parser.add_argument("--version", action="store_true", help="Version of PyFetch")
@@ -235,6 +281,7 @@ if cfg.get('enable_flags', 'true') == 'true':
         parser.add_argument("--skipconfig", action="store_true", help="Skip pyfetch.conf")
         parser.add_argument("--noplugins", action="store_true", help="Exclude Plugins")
         parser.add_argument("--list-plugins", action="store_true", help="List all available plugins")
+        parser.add_argument("--fun-fact", action="store_true", help="Show some fun facts")
         args = parser.parse_args()
 
         if args.minimal:
@@ -245,7 +292,11 @@ if cfg.get('enable_flags', 'true') == 'true':
             exit()
 
         if args.banner:
-            print(ascii_banner)
+            if banner_text == "Manjaro":
+                print("Autocorrecting to Trashjaro.")
+                print(trashjaro_backup)
+            else:
+                print(ascii_banner)
             exit()
 
         if args.version:
@@ -269,6 +320,10 @@ if cfg.get('enable_flags', 'true') == 'true':
             plugin_dir = os.path.expanduser("~/.config/pyfetch/plugins")
             plugins = load_plugins(plugin_dir)
             list_plugins(plugins)
+            exit()
+
+        if args.fun_fact:
+            print(random_fact)
             exit()
 
         # If no flags are running
