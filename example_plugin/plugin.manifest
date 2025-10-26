@@ -1,4 +1,4 @@
 name = "Template Plugin"
 description = "Just a template"
-required_version = "1.1.03"
+required_version = "1.1.1"
 role = "read_only"
