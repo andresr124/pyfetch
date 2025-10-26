@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Preparing to install pyfetch..."
 sleep 1
 
 # Check if Python is installed
 if ! command -v python3 &> /dev/null; then
-    echo "python3 is not installed. Please install it now."
+    echo "python3 is not installed. Please install it now. (If your on Linux, HOW DO YOU NOT HAVE PYTHON??)"
     exit 1
 fi
 
@@ -22,6 +22,8 @@ elif grep -qi zorin /etc/os-release; then
     echo "Zorin OS detected, skipping pip check."
 elif grep -qi debian /etc/os-release; then
     echo "Saving Python Pip check for later."
+elif grep -qi cachyos /etc/os-release; then
+    echo "CachyOS detected, skipping pip check."
 else
     if ! command -v pip &> /dev/null; then
       echo "Python Pip is not installed. Please install it now."
@@ -61,10 +63,12 @@ case "$choice" in
         echo "Python Pip detected, installing packaging..."
         pip install packaging
       fi
+    elif grep -qi cachyos /etc/os-release; then
+      sudo pacman -S --noconfirm python-pyfiglet python-packaging python-psutil
     else
       pip install pyfiglet
       pip install packaging
-      pip install python-psutil
+      pip install psutil
     fi
     sleep 1
     echo "Installing pyfetch..."
