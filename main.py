@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-PYFETCH_VERSION = "1.1.1-2" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.2" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -96,13 +96,13 @@ def get_distro_name():
     try:
         with open("/etc/os-release") as f:
             for line in f:
-                if line.startswith("PRETTY_NAME="):
+                if line.startswith("NAME="):
                     return line.strip().split("=")[1].strip('"')
     except FileNotFoundError:
         return None
 
-if get_distro_name() == "Manjaro":
-    distro_name = "Trashjaro"
+if get_distro_name() == "Manjaro Linux":
+    distro_name = "Trashjaro Linux"
 else:
     distro_name = get_distro_name()
 
@@ -124,7 +124,7 @@ if banner_text is None:
     banner_text = distro_name
 
 ascii_banner = pyfiglet.figlet_format(banner_text)
-trashjaro_backup = pyfiglet.figlet_format("Trashjaro")
+trashjaro_backup = pyfiglet.figlet_format("Trashjaro Linux")
 
 # Find amount of packages
 def get_package_count():
@@ -154,7 +154,7 @@ def get_desktop_environment():
     de = os.environ.get("XDG_CURRENT_DESKTOP") or os.environ.get("DESKTOP_SESSION") or "Unknown"
     if "KDE" in de.upper() or "PLASMA" in de.upper():
         return f"KDE Plasma (You have great taste!)"
-    if "Zorin" in de.upper():
+    if "zorin:GNOME" in de.upper():
         return f"GNOME"
     return de
 
@@ -170,11 +170,14 @@ facts = [
     "Windows does not support PyFetch.",
     "Did you know Gentoo users compiled their entire soul?",
     "Be aware of penguinitis!",
+    "Your IP Address is 62.57.128.236",
     "Did you know Arch users never touch grass?",
     "Does people even read these?",
     "Did you know Windows users think that Linux users are like hackers?",
     "PyFetch was inspired by Neofetch.",
     "Candice? Who's candice?",
+    "The Linux kernel was created by Linus Torvalds",
+    "Did you know KDE Plasma was created in October 14, 1996 and was originally named KDE for K Desktop Environment?",
     "Did you know PyFetch has the MIT License?",
     "The PyFetch github is https://github.com/linuxaddict124/pyfetch",
     "Python is great for AI!",
@@ -185,7 +188,7 @@ random_fact = random.choice(facts)
 # Turn entire base of PyFetch to 1 command
 def pyfetchbase():
     if cfg.get('ascii_art', 'true') == 'true':
-        if banner_text == "Manjaro":
+        if banner_text == "Manjaro" or banner_text == "Manjaro Linux":
             print("Autocorrecting to Trashjaro.")
             print(trashjaro_backup)
         else:
@@ -217,8 +220,8 @@ def pyfetchbase():
         run_plugins(plugins, cfg, PYFETCH_VERSION)
 
 def pyfetchbasenonconfig():
-    if banner_text == "Manjaro":
-        print("Autocorrecting to Trashjaro.")
+    if banner_text == "Manjaro" or banner_text == "Manjaro Linux":
+        print("Autocorrecting to Trashjaro Linux.")
         print(trashjaro_backup)
     else:
         print(ascii_banner)
@@ -241,8 +244,8 @@ def pyfetchbasenonconfig():
 
 def nopluginsbase():
     if cfg.get('ascii_art', 'true') == 'true':
-        if banner_text == "Manjaro":
-            print("Autocorrecting to Trashjaro.")
+        if banner_text == "Manjaro" or banner_text == "Manjaro Linux":
+            print("Autocorrecting to Trashjaro Linux.")
             print(trashjaro_backup)
         else:
             print(ascii_banner)
@@ -283,6 +286,7 @@ if cfg.get('enable_flags', 'true') == 'true':
         parser.add_argument("--list-plugins", action="store_true", help="List all available plugins")
         parser.add_argument("--fun-fact", action="store_true", help="Show some fun facts")
         parser.add_argument("--edit-config", action="store_true", help="A easier way to edit pyfetch.conf")
+        parser.add_argument("--desktop", action="store_true", help="Show your desktop environment")
         args = parser.parse_args()
 
         if args.minimal:
@@ -293,8 +297,8 @@ if cfg.get('enable_flags', 'true') == 'true':
             exit()
 
         if args.banner:
-            if banner_text == "Manjaro":
-                print("Autocorrecting to Trashjaro.")
+            if banner_text == "Manjaro" or banner_text == "Manjaro Linux":
+                print("Autocorrecting to Trashjaro Linux.")
                 print(trashjaro_backup)
             else:
                 print(ascii_banner)
@@ -329,6 +333,10 @@ if cfg.get('enable_flags', 'true') == 'true':
 
         if args.edit_config:
             os.system('nano ~/.config/pyfetch/pyfetch.conf')
+            exit()
+
+        if args.desktop:
+            print(f"Desktop Environment: {de}")
             exit()
 
         # If no flags are running
