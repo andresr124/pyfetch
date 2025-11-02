@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-PYFETCH_VERSION = "1.1.2" # Changing the version in this line is highly not recommended.
+PYFETCH_VERSION = "1.1.3" # Changing the version in this line is highly not recommended.
 import os
 
 # Load ~/.config/pyfetch/pyfetch.conf
@@ -32,6 +32,7 @@ import importlib.util
 import subprocess
 import argparse
 import time
+import requests
 import random
 pluginloader_path = os.path.expanduser("~/.config/pyfetch")
 sys.path.append(pluginloader_path)
@@ -71,6 +72,14 @@ def get_shell_version():
         return version_output.split('\n')[0]  # First line only
     except Exception:
         return f"{shell_name} (version unknown)"
+
+# Load Public IP Address
+def get_public_ip():
+    try:
+        ip = requests.get("https://api.ipify.org").text
+        return ip
+    except requests.RequestException:
+        return "Unavailable"
 
 # Load plugins
 plugin_dir = os.path.expanduser("~/.config/pyfetch/plugins")
@@ -181,7 +190,11 @@ facts = [
     "Did you know PyFetch has the MIT License?",
     "The PyFetch github is https://github.com/linuxaddict124/pyfetch",
     "Python is great for AI!",
-    "I wonder if Python websites exist."
+    "I wonder if Python websites exist.",
+    "Did you know that the official PyFetch website is pyfetch.github.io?",
+    "Did you know the most popular distros are based on Ubuntu?",
+    "Did you know both MacOS and Ubuntu are based on Unix? I wonder why XNU stands for 'X is Not Unix' then...",
+    "Java is more complicated than Python. Don't believe it? Try to print Hello World in Java."
     ]
 random_fact = random.choice(facts)
 
@@ -210,6 +223,8 @@ def pyfetchbase():
         print("Fun Fact:", random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
+    if cfg.get('show_ip', 'true') == 'true':
+        print(f"Public IP: {get_public_ip()}")
     if cfg.get('show_shell_version', 'true') == 'true':
         print("Shell:", get_shell_version())
     if cfg.get('show_battery', 'true') == 'true':
@@ -236,6 +251,7 @@ def pyfetchbasenonconfig():
         print("Packages: Unknown")
     print("Fun Fact:", random_fact)
     print(f"PyFetch Version:", PYFETCH_VERSION)
+    print(f"Public IP: {get_public_ip()}")
     print("Shell:", get_shell_version())
     print("Battery:", get_battery_percentage())
     print(f"CPU: {os.uname().machine}")
@@ -266,6 +282,8 @@ def nopluginsbase():
         print("Fun Fact:", random_fact)
     if cfg.get('show_pyfversion', 'true') == 'true':
         print(f"PyFetch Version:", PYFETCH_VERSION)
+    if cfg.get('show_ip', 'true') == 'true':
+        print(f"Public IP: {get_public_ip()}")
     if cfg.get('show_shell_version', 'true') == 'true':
         print("Shell:", get_shell_version())
     if cfg.get('show_battery', 'true') == 'true':
@@ -287,6 +305,8 @@ if cfg.get('enable_flags', 'true') == 'true':
         parser.add_argument("--fun-fact", action="store_true", help="Show some fun facts")
         parser.add_argument("--edit-config", action="store_true", help="A easier way to edit pyfetch.conf")
         parser.add_argument("--desktop", action="store_true", help="Show your desktop environment")
+        parser.add_argument("--public-ip", action="store_true", help="Show your Public IP")
+        parser.add_argument("--kernel", action="store_true", help="Show your Kernel Version")
         args = parser.parse_args()
 
         if args.minimal:
@@ -337,6 +357,14 @@ if cfg.get('enable_flags', 'true') == 'true':
 
         if args.desktop:
             print(f"Desktop Environment: {de}")
+            exit()
+        
+        if args.public_ip:
+            print(f"Public IP: {get_public_ip()}")
+            exit()
+        
+        if args.kernel:
+            print(f"Kernel: {platform.system()} {platform.release()}")
             exit()
 
         # If no flags are running
